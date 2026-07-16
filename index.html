@@ -188,7 +188,7 @@
   @media (max-width: 700px){ .about-grid{grid-template-columns:1fr;} .about-photo{max-width:220px;} }
 
   /* ---------- SKILLS ---------- */
-  .skills-cols{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .skills-cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:40px;}
   .skill-col-label{
     font-family:var(--mono); font-size:13px; color:var(--cyan);
     margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--line);
@@ -200,7 +200,7 @@
     color:var(--text-dim); transition:all 0.15s ease;
   }
   .chip:hover{border-color:var(--amber); color:var(--text);}
-  @media (max-width: 700px){ .skills-cols{grid-template-columns:1fr;} }
+  @media (max-width: 480px){ .skills-cols{grid-template-columns:1fr;} }
 
   /* ---------- TIMELINE (education + experience) ---------- */
   .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
@@ -352,6 +352,8 @@
             <span class="chip">OOPs</span>
             <span class="chip">MySQL</span>
             <span class="chip">SQL Server</span>
+            <span class="chip">WordPress</span>
+            <span class="chip">Joomla</span>
           </div>
         </div>
         <div>
@@ -363,6 +365,13 @@
             <span class="chip">HTML</span>
             <span class="chip">CSS</span>
             <span class="chip">Bootstrap 5</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-col-label">cloud &amp; infra</div>
+          <div class="chips">
+            <span class="chip">Google Cloud</span>
+            <span class="chip">Cloudflare</span>
           </div>
         </div>
       </div>
@@ -388,9 +397,10 @@
             <div class="t-sub">Freelance — Good Value Center</div>
           </div>
           <div class="t-item">
-            <div class="t-date">12/2028 — 12/2025</div>
-            <div class="t-title">Sr. Software Engineer</div>
-            <div class="t-sub">Freelance — Taylor Robinson Music Company</div>
+            <div class="t-date">2018 — 2026</div>
+            <div class="t-title">Full Stack Developer</div>
+            <div class="t-sub">Full-time — <a href="https://www.taylorrobinsonmusic.com/" target="_blank" rel="noopener" style="color:var(--cyan);">Taylor Robinson Music</a></div>
+            <div class="t-sub" style="margin-top:4px;">Joomla &amp; React Native mobile application for end users</div>
           </div>
         </div>
       </div>
