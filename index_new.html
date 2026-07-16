@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjay Goyal — Full-Stack &amp; Mobile Engineer</title>
+<meta name="description" content="Sanjay Goyal — Senior Web &amp; Mobile Developer. PHP, Vue.js, MySQL, React Native. 10+ years building scalable applications from Indore, India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1e23;
+    --bg-panel:#10262b;
+    --bg-card:#153037;
+    --line:#1f3d42;
+    --line-soft:#173338;
+    --text:#e9eeec;
+    --text-dim:#8fa8a4;
+    --amber:#e8a33d;
+    --amber-dim:#a97a34;
+    --cyan:#49c6ba;
+    --radius:10px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--amber); color:#0b1e23;}
+
+  /* subtle grid texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.25;
+    pointer-events:none;
+    z-index:0;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,30,35,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:0 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px;
+  }
+  .brand{
+    font-family:var(--mono); font-size:14px; font-weight:700;
+    color:var(--text); letter-spacing:0.02em;
+  }
+  .brand span{color:var(--amber);}
+  .tabs{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    font-family:var(--mono); font-size:12.5px;
+    padding:8px 14px; color:var(--text-dim);
+    border-right:1px solid var(--line);
+    white-space:nowrap;
+    transition:color 0.15s ease, background 0.15s ease;
+  }
+  .tab:first-child{border-left:1px solid var(--line);}
+  .tab:hover, .tab:focus-visible{color:var(--amber); background:var(--bg-panel);}
+  .tab .ext{color:var(--cyan); opacity:0.7;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--amber); outline-offset:3px;
+  }
+
+  section{position:relative; z-index:1;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 80px;
+    display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; color:var(--cyan);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:""; width:8px; height:8px; border-radius:50%;
+    background:var(--cyan); box-shadow:0 0 0 3px rgba(73,198,186,0.18);
+  }
+  h1.name{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(2.6rem, 5.2vw, 4.2rem);
+    line-height:1.02; letter-spacing:-0.01em;
+    margin-bottom:18px;
+  }
+  .roles{
+    font-family:var(--mono); font-size:15px; color:var(--text-dim);
+    margin-bottom:30px; max-width:38ch;
+  }
+  .roles .accent{color:var(--amber);}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; font-weight:500;
+    padding:13px 24px; border-radius:6px; border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary{background:var(--amber); color:#10262b; border-color:var(--amber); font-weight:700;}
+  .btn-primary:hover{transform:translateY(-2px); background:#f0af4d;}
+  .btn-ghost{color:var(--text); }
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px);}
+
+  /* code editor panel */
+  .editor{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .editor-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 14px; border-bottom:1px solid var(--line);
+    background:var(--bg-card);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#e8756a;} .dot.y{background:#e8c15e;} .dot.g{background:#6ecf8e;}
+  .editor-file{font-family:var(--mono); font-size:12px; color:var(--text-dim); margin-left:8px;}
+  .editor-body{
+    padding:22px 20px; font-family:var(--mono); font-size:13.5px;
+    color:var(--text-dim); min-height:280px;
+  }
+  .editor-body .ln{color:#3f5a5a; user-select:none; display:inline-block; width:22px;}
+  .key{color:var(--cyan);}
+  .str{color:var(--amber);}
+  .punc{color:#5f8a86;}
+  .cursor{
+    display:inline-block; width:7px; height:15px; background:var(--amber);
+    vertical-align:text-bottom; animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  @media (max-width: 860px){
+    .hero{grid-template-columns:1fr; padding-top:56px;}
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  .sec-head{margin-bottom:44px;}
+  .sec-tag{
+    font-family:var(--mono); font-size:12px; color:var(--amber);
+    letter-spacing:0.06em; margin-bottom:10px; display:block;
+  }
+  .sec-title{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+  }
+  section.block{padding:80px 0; border-top:1px solid var(--line);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:260px 1fr; gap:48px; align-items:start;}
+  .about-photo{
+    border-radius:var(--radius); border:1px solid var(--line);
+    overflow:hidden; aspect-ratio:1/1; object-fit:cover;
+    filter:grayscale(0.3) contrast(1.05);
+  }
+  .about-text p{color:var(--text-dim); margin-bottom:16px; max-width:62ch;}
+  .about-text strong{color:var(--text); font-weight:600;}
+  @media (max-width: 700px){ .about-grid{grid-template-columns:1fr;} .about-photo{max-width:220px;} }
+
+  /* ---------- SKILLS ---------- */
+  .skills-cols{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .skill-col-label{
+    font-family:var(--mono); font-size:13px; color:var(--cyan);
+    margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    font-family:var(--mono); font-size:12.5px; padding:8px 13px;
+    background:var(--bg-card); border:1px solid var(--line); border-radius:5px;
+    color:var(--text-dim); transition:all 0.15s ease;
+  }
+  .chip:hover{border-color:var(--amber); color:var(--text);}
+  @media (max-width: 700px){ .skills-cols{grid-template-columns:1fr;} }
+
+  /* ---------- TIMELINE (education + experience) ---------- */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
+  .t-item{position:relative; padding-bottom:38px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:""; position:absolute; left:-33px; top:4px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--amber);
+  }
+  .t-date{font-family:var(--mono); font-size:12px; color:var(--cyan); margin-bottom:6px;}
+  .t-title{font-family:var(--display); font-weight:600; font-size:1.05rem; margin-bottom:3px;}
+  .t-sub{color:var(--text-dim); font-size:14px;}
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  @media (max-width: 760px){ .two-col{grid-template-columns:1fr;} }
+
+  /* ---------- SERVICES (real pipeline) ---------- */
+  .pipeline{display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+  .pipe-step{
+    position:relative; padding:26px 20px 22px; border:1px solid var(--line);
+    background:var(--bg-panel);
+  }
+  .pipe-step + .pipe-step{border-left:none;}
+  .pipe-step:first-child{border-radius:8px 0 0 8px;}
+  .pipe-step:last-child{border-radius:0 8px 8px 0;}
+  .pipe-num{font-family:var(--mono); font-size:11px; color:var(--amber-dim); margin-bottom:12px;}
+  .pipe-title{font-family:var(--display); font-weight:600; font-size:1.05rem; margin-bottom:8px;}
+  .pipe-arrow{
+    position:absolute; right:-11px; top:50%; transform:translateY(-50%);
+    width:22px; height:22px; border-radius:50%;
+    background:var(--bg); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; z-index:2;
+    color:var(--amber); font-family:var(--mono); font-size:12px;
+  }
+  .pipe-step:last-child .pipe-arrow{display:none;}
+  @media (max-width: 760px){
+    .pipeline{grid-template-columns:1fr;}
+    .pipe-step{border-left:1px solid var(--line) !important; border-radius:0 !important;}
+    .pipe-step:first-child{border-radius:8px 8px 0 0 !important;}
+    .pipe-step:last-child{border-radius:0 0 8px 8px !important;}
+    .pipe-arrow{right:auto; left:50%; top:auto; bottom:-11px; transform:translate(-50%,0) rotate(90deg);}
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .repo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .repo-card{
+    border:1px solid var(--line); border-radius:8px; overflow:hidden;
+    background:var(--bg-panel); transition:transform 0.18s ease, border-color 0.18s ease;
+  }
+  .repo-card:hover{transform:translateY(-4px); border-color:var(--cyan);}
+  .repo-img{aspect-ratio:16/10; object-fit:cover; filter:saturate(0.85);}
+  .repo-body{padding:16px 18px;}
+  .repo-path{font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:6px;}
+  .repo-path .slash{color:var(--amber);}
+  .repo-name{font-family:var(--display); font-weight:600; font-size:0.98rem;}
+  @media (max-width: 860px){ .repo-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width: 600px){ .repo-grid{grid-template-columns:1fr;} }
+
+  /* ---------- CONTACT (terminal) ---------- */
+  .terminal{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+    max-width:640px; overflow:hidden;
+  }
+  .term-body{padding:24px 22px; font-family:var(--mono); font-size:13.5px;}
+  .term-line{margin-bottom:10px; color:var(--text-dim);}
+  .prompt{color:var(--cyan);}
+  .term-cmd{color:var(--text);}
+  .term-out{padding-left:0; margin-bottom:18px;}
+  .term-out div{margin-bottom:4px;}
+  .term-out a:hover{color:var(--amber);}
+  .term-label{color:var(--text-dim);}
+  .term-val{color:var(--text);}
+
+  footer{
+    padding:32px 0; text-align:center; font-family:var(--mono);
+    font-size:12px; color:var(--text-dim); border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">sanjay<span>@</span>goyal</div>
+    <nav class="tabs" aria-label="Section navigation">
+      <a class="tab" href="#home">home<span class="ext">.jsx</span></a>
+      <a class="tab" href="#about">about<span class="ext">.php</span></a>
+      <a class="tab" href="#skills">skills<span class="ext">.json</span></a>
+      <a class="tab" href="#experience">experience<span class="ext">.log</span></a>
+      <a class="tab" href="#services">services<span class="ext">.yml</span></a>
+      <a class="tab" href="#projects">projects<span class="ext">/</span></a>
+      <a class="tab" href="#contact">contact<span class="ext">.sh</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="wrap" style="display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center; width:100%;">
+      <div>
+        <span class="eyebrow">Available for freelance &amp; full-time roles</span>
+        <h1 class="name">Sanjay Goyal</h1>
+        <p class="roles">Senior <span class="accent">Full-Stack</span> &amp; <span class="accent">Mobile</span> Engineer — PHP, Vue.js, MySQL and React Native, shipping production systems for 10+ years.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://sanjay-jsm-official.github.io/docs/Sanjay_cv.pdf">↓ Resume</a>
+          <a class="btn btn-ghost" href="#contact">Hire me</a>
+        </div>
+      </div>
+      <div class="editor" role="img" aria-label="Code editor showing a JSON summary of Sanjay's profile">
+        <div class="editor-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="editor-file">profile.json</span>
+        </div>
+        <div class="editor-body" id="typewriter"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">// about</span>
+        <h2 class="sec-title">Ten years, one focus: ship it right.</h2>
+      </div>
+      <div class="about-grid">
+        <img class="about-photo" src="https://sanjay-jsm-official.github.io/docs/sanjay_img.jpg" alt="Sanjay Goyal">
+        <div class="about-text">
+          <p><strong>Senior Web and Mobile Developer</strong> with 10+ years of expertise building scalable, dynamic, user-focused applications. Proficient in PHP, Joomla, WordPress, React Native, JavaScript, HTML and CSS, with a strong background in payment gateway integration and custom component development.</p>
+          <p>Skilled in delivering high-quality projects on time while ensuring performance, security and user satisfaction. The goal is simple: build digital solutions that meet client needs and feel effortless to use.</p>
+          <p style="margin-top:22px;"><a class="btn btn-ghost" href="https://www.linkedin.com/in/sanjay-goyal-1390b32b/" target="_blank" rel="noopener">View LinkedIn →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">// skills</span>
+        <h2 class="sec-title">The stack, categorized.</h2>
+      </div>
+      <div class="skills-cols">
+        <div>
+          <div class="skill-col-label">backend &amp; data</div>
+          <div class="chips">
+            <span class="chip">PHP</span>
+            <span class="chip">Yii Framework</span>
+            <span class="chip">OOPs</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">SQL Server</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-col-label">frontend</div>
+          <div class="chips">
+            <span class="chip">Vue.js</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">jQuery</span>
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">Bootstrap 5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap two-col">
+      <div>
+        <div class="sec-head">
+          <span class="sec-tag">// experience.log</span>
+          <h2 class="sec-title">Work history</h2>
+        </div>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-date">06/2012 — current</div>
+            <div class="t-title">Sr. Software Engineer</div>
+            <div class="t-sub">Coderevolts, Indore</div>
+          </div>
+          <div class="t-item">
+            <div class="t-date">07/2016 — 12/2018</div>
+            <div class="t-title">Sr. Software Engineer</div>
+            <div class="t-sub">Freelance — Good Value Center</div>
+          </div>
+          <div class="t-item">
+            <div class="t-date">12/2028 — 12/2025</div>
+            <div class="t-title">Sr. Software Engineer</div>
+            <div class="t-sub">Freelance — Taylor Robinson Music Company</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head">
+          <span class="sec-tag">// education.log</span>
+          <h2 class="sec-title">Education</h2>
+        </div>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-date">01-Jun-2007 — 31-Jun-2011</div>
+            <div class="t-title">Master Degree (MCA)</div>
+          </div>
+          <div class="t-item">
+            <div class="t-date">01-Jun-2004 — 31-Apr-2007</div>
+            <div class="t-title">Bachelor Degree (BSC)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">// services.yml</span>
+        <h2 class="sec-title">How a project moves through the pipeline</h2>
+      </div>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num">STAGE 01</div>
+          <div class="pipe-title">Web Design</div>
+          <div class="pipe-arrow">→</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">STAGE 02</div>
+          <div class="pipe-title">Web Development</div>
+          <div class="pipe-arrow">→</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">STAGE 03</div>
+          <div class="pipe-title">Server</div>
+          <div class="pipe-arrow">→</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">STAGE 04</div>
+          <div class="pipe-title">Deployment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">// projects</span>
+        <h2 class="sec-title">Recent repositories</h2>
+      </div>
+      <div class="repo-grid">
+        <div class="repo-card">
+          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Printing Website project">
+          <div class="repo-body">
+            <div class="repo-path">projects<span class="slash">/</span>printing-website</div>
+            <div class="repo-name">Printing Website</div>
+          </div>
+        </div>
+        <div class="repo-card">
+          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Good Value Home Improvement Website project">
+          <div class="repo-body">
+            <div class="repo-path">projects<span class="slash">/</span>good-value-home</div>
+            <div class="repo-name">Good Value Home Improvement</div>
+          </div>
+        </div>
+        <div class="repo-card">
+          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Ideal Mobile Spa appointment website project">
+          <div class="repo-body">
+            <div class="repo-path">projects<span class="slash">/</span>ideal-mobile-spa</div>
+            <div class="repo-name">Ideal Mobile Spa — Appointments</div>
+          </div>
+        </div>
+        <div class="repo-card">
+          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Taobaotrends Ecommerce site project">
+          <div class="repo-body">
+            <div class="repo-path">projects<span class="slash">/</span>taobaotrends</div>
+            <div class="repo-name">Taobaotrends — Ecommerce</div>
+          </div>
+        </div>
+        <div class="repo-card">
+          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Ecommerce Website WordPress project">
+          <div class="repo-body">
+            <div class="repo-path">projects<span class="slash">/</span>wp-ecommerce</div>
+            <div class="repo-name">Ecommerce Website (WordPress)</div>
+          </div>
+        </div>
+        <div class="repo-card">
+          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Textile ERP System project">
+          <div class="repo-body">
+            <div class="repo-path">projects<span class="slash">/</span>textile-erp</div>
+            <div class="repo-name">Textile ERP System</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">// contact.sh</span>
+        <h2 class="sec-title">Let's build something.</h2>
+      </div>
+      <div class="terminal">
+        <div class="editor-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="editor-file">contact.sh — zsh</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line"><span class="prompt">sanjay@indore</span><span class="punc">:~$</span> <span class="term-cmd">cat contact.txt</span></div>
+          <div class="term-out">
+            <div><span class="term-label">name&nbsp;&nbsp;&nbsp;&nbsp;</span> <span class="term-val">Sanjay Goyal, Web Developer</span></div>
+            <div><span class="term-label">email&nbsp;&nbsp;&nbsp;</span> <a class="term-val" href="mailto:sanjay.coderevolts@gmail.com">sanjay.coderevolts@gmail.com</a></div>
+            <div><span class="term-label">phone&nbsp;&nbsp;&nbsp;</span> <a class="term-val" href="tel:+917987705138">+91 7987705138</a></div>
+            <div><span class="term-label">location</span> <span class="term-val">Indore, India</span></div>
+            <div><span class="term-label">linkedin</span> <a class="term-val" href="https://www.linkedin.com/in/sanjay-goyal-1390b32b/" target="_blank" rel="noopener">/in/sanjay-goyal-1390b32b</a></div>
+          </div>
+          <div class="term-line"><span class="prompt">sanjay@indore</span><span class="punc">:~$</span> <span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Built by Sanjay Goyal — Indore, India · © <span id="year"></span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Typewriter effect for hero editor panel
+  const lines = [
+    { n: 1, html: '<span class="punc">{</span>' },
+    { n: 2, html: '&nbsp;&nbsp;<span class="key">"name"</span><span class="punc">:</span> <span class="str">"Sanjay Goyal"</span><span class="punc">,</span>' },
+    { n: 3, html: '&nbsp;&nbsp;<span class="key">"role"</span><span class="punc">:</span> <span class="str">"Full-Stack &amp; Mobile Engineer"</span><span class="punc">,</span>' },
+    { n: 4, html: '&nbsp;&nbsp;<span class="key">"experience"</span><span class="punc">:</span> <span class="str">"10+ years"</span><span class="punc">,</span>' },
+    { n: 5, html: '&nbsp;&nbsp;<span class="key">"stack"</span><span class="punc">:</span> <span class="punc">[</span><span class="str">"PHP"</span><span class="punc">,</span> <span class="str">"Vue.js"</span><span class="punc">,</span> <span class="str">"MySQL"</span><span class="punc">,</span> <span class="str">"React Native"</span><span class="punc">],</span>' },
+    { n: 6, html: '&nbsp;&nbsp;<span class="key">"based_in"</span><span class="punc">:</span> <span class="str">"Indore, India"</span>' },
+    { n: 7, html: '<span class="punc">}</span>' },
+  ];
+
+  const el = document.getElementById('typewriter');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    el.innerHTML = lines.map(l => `<div><span class="ln">${l.n}</span>${l.html}</div>`).join('');
+  }
+
+  if(reduceMotion){
+    renderStatic();
+  } else {
+    let i = 0;
+    function typeLine(){
+      if(i >= lines.length){
+        const c = document.createElement('span');
+        c.className = 'cursor';
+        el.appendChild(c);
+        return;
+      }
+      const row = document.createElement('div');
+      row.innerHTML = `<span class="ln">${lines[i].n}</span>`;
+      el.appendChild(row);
+      const content = document.createElement('span');
+      row.appendChild(content);
+      content.innerHTML = lines[i].html;
+      content.style.opacity = 0;
+      requestAnimationFrame(() => {
+        content.style.transition = 'opacity 0.2s ease';
+        content.style.opacity = 1;
+      });
+      i++;
+      setTimeout(typeLine, 220);
+    }
+    typeLine();
+  }
+</script>
+
+</body>
+</html>
