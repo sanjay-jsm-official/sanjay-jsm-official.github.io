@@ -221,14 +221,15 @@
   /* ---------- SERVICES (real pipeline) ---------- */
   .pipeline{display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
   .pipe-step{
-    position:relative; padding:26px 20px 22px; border:1px solid var(--line);
-    background:var(--bg-panel);
+    position:relative; padding:26px 22px 26px; border:1px solid var(--line);
+    background:var(--bg-panel); min-height:168px;
   }
   .pipe-step + .pipe-step{border-left:none;}
   .pipe-step:first-child{border-radius:8px 0 0 8px;}
   .pipe-step:last-child{border-radius:0 8px 8px 0;}
   .pipe-num{font-family:var(--mono); font-size:11px; color:var(--amber-dim); margin-bottom:12px;}
   .pipe-title{font-family:var(--display); font-weight:600; font-size:1.05rem; margin-bottom:8px;}
+  .pipe-desc{font-size:13px; color:var(--text-dim); line-height:1.5;}
   .pipe-arrow{
     position:absolute; right:-11px; top:50%; transform:translateY(-50%);
     width:22px; height:22px; border-radius:50%;
@@ -433,21 +434,25 @@
         <div class="pipe-step">
           <div class="pipe-num">STAGE 01</div>
           <div class="pipe-title">Web Design</div>
+          <div class="pipe-desc">Wireframes, UI/UX and responsive layouts before a line of code ships.</div>
           <div class="pipe-arrow">→</div>
         </div>
         <div class="pipe-step">
           <div class="pipe-num">STAGE 02</div>
           <div class="pipe-title">Web Development</div>
+          <div class="pipe-desc">Frontend and backend build — PHP, Vue.js, WordPress or Joomla, wired together.</div>
           <div class="pipe-arrow">→</div>
         </div>
         <div class="pipe-step">
           <div class="pipe-num">STAGE 03</div>
           <div class="pipe-title">Server</div>
+          <div class="pipe-desc">Environment setup, database config and security hardening on Google Cloud / Cloudflare.</div>
           <div class="pipe-arrow">→</div>
         </div>
         <div class="pipe-step">
           <div class="pipe-num">STAGE 04</div>
           <div class="pipe-title">Deployment</div>
+          <div class="pipe-desc">Rollout, monitoring and ongoing support once it's live.</div>
         </div>
       </div>
     </div>
