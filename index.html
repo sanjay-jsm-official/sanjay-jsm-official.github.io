@@ -247,19 +247,52 @@
   }
 
   /* ---------- PROJECTS ---------- */
-  .repo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
-  .repo-card{
-    border:1px solid var(--line); border-radius:8px; overflow:hidden;
-    background:var(--bg-panel); transition:transform 0.18s ease, border-color 0.18s ease;
+  .repo-list{border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .repo-list-head{
+    display:grid; grid-template-columns:64px 1fr 150px 22px; gap:18px;
+    padding:11px 20px; font-family:var(--mono); font-size:10.5px; color:var(--text-dim);
+    text-transform:uppercase; letter-spacing:0.08em;
+    background:var(--bg-card); border-bottom:1px solid var(--line);
   }
-  .repo-card:hover{transform:translateY(-4px); border-color:var(--cyan);}
-  .repo-img{aspect-ratio:16/10; object-fit:cover; filter:saturate(0.85);}
-  .repo-body{padding:16px 18px;}
-  .repo-path{font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:6px;}
+  .repo-row{
+    display:grid; grid-template-columns:64px 1fr 150px 22px; gap:18px; align-items:center;
+    padding:14px 20px; border-bottom:1px solid var(--line);
+    background:var(--bg-panel); transition:background 0.15s ease;
+  }
+  .repo-row:last-child{border-bottom:none;}
+  .repo-row:hover, .repo-row:focus-visible{background:var(--bg-card);}
+  .repo-thumb{
+    width:64px; height:48px; object-fit:cover; border-radius:5px;
+    border:1px solid var(--line); filter:saturate(0.8) contrast(1.05);
+  }
+  .repo-thumb-mono{
+    width:64px; height:48px; border-radius:5px; border:1px solid var(--amber);
+    background:var(--amber); color:#10262b; font-family:var(--mono); font-weight:700;
+    font-size:12px; display:flex; align-items:center; justify-content:center;
+    letter-spacing:0.02em;
+  }
+  .repo-row.featured{background:var(--bg-card);}
+  .repo-row.featured .repo-name{color:var(--amber);}
+  .repo-meta{min-width:0;}
+  .repo-path{
+    font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:3px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
   .repo-path .slash{color:var(--amber);}
-  .repo-name{font-family:var(--display); font-weight:600; font-size:0.98rem;}
-  @media (max-width: 860px){ .repo-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width: 600px){ .repo-grid{grid-template-columns:1fr;} }
+  .repo-name{
+    font-family:var(--display); font-weight:600; font-size:0.96rem;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .repo-tag{font-family:var(--mono); font-size:11px; color:var(--cyan); text-align:right;}
+  .repo-go{color:var(--text-dim); transition:transform 0.15s ease, color 0.15s ease;}
+  .repo-row:hover .repo-go{color:var(--amber); transform:translateX(3px);}
+  @media (max-width: 620px){
+    .repo-list-head{display:none;}
+    .repo-row{grid-template-columns:52px 1fr 18px; gap:14px; padding:12px 16px;}
+    .repo-thumb{width:52px; height:40px;}
+    .repo-thumb-mono{width:52px; height:40px; font-size:10px;}
+    .repo-tag{display:none;}
+  }
 
   /* ---------- CONTACT (terminal) ---------- */
   .terminal{
@@ -464,49 +497,73 @@
         <span class="sec-tag">// projects</span>
         <h2 class="sec-title">Recent repositories</h2>
       </div>
-      <div class="repo-grid">
-        <div class="repo-card">
-          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Printing Website project">
-          <div class="repo-body">
+      <div class="repo-list">
+        <div class="repo-list-head">
+          <span>preview</span><span>path</span><span>stack</span><span></span>
+        </div>
+        <a class="repo-row featured" href="https://www.taylorrobinsonmusic.com/" target="_blank" rel="noopener">
+          <div class="repo-thumb-mono">TRM</div>
+          <div class="repo-meta">
+            <div class="repo-path">projects<span class="slash">/</span>taylor-robinson-music</div>
+            <div class="repo-name">Taylor Robinson Music — Site &amp; Mobile App</div>
+          </div>
+          <div class="repo-tag">Featured · Joomla + React Native</div>
+          <div class="repo-go">→</div>
+        </a>
+        <a class="repo-row" href="#">
+          <img class="repo-thumb" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Printing Website project">
+          <div class="repo-meta">
             <div class="repo-path">projects<span class="slash">/</span>printing-website</div>
             <div class="repo-name">Printing Website</div>
           </div>
-        </div>
-        <div class="repo-card">
-          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Good Value Home Improvement Website project">
-          <div class="repo-body">
+          <div class="repo-tag">Web · PHP</div>
+          <div class="repo-go">→</div>
+        </a>
+        <a class="repo-row" href="#">
+          <img class="repo-thumb" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Good Value Home Improvement Website project">
+          <div class="repo-meta">
             <div class="repo-path">projects<span class="slash">/</span>good-value-home</div>
             <div class="repo-name">Good Value Home Improvement</div>
           </div>
-        </div>
-        <div class="repo-card">
-          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Ideal Mobile Spa appointment website project">
-          <div class="repo-body">
+          <div class="repo-tag">Web · WordPress</div>
+          <div class="repo-go">→</div>
+        </a>
+        <a class="repo-row" href="#">
+          <img class="repo-thumb" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Ideal Mobile Spa appointment website project">
+          <div class="repo-meta">
             <div class="repo-path">projects<span class="slash">/</span>ideal-mobile-spa</div>
             <div class="repo-name">Ideal Mobile Spa — Appointments</div>
           </div>
-        </div>
-        <div class="repo-card">
-          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Taobaotrends Ecommerce site project">
-          <div class="repo-body">
+          <div class="repo-tag">Web · Bookings</div>
+          <div class="repo-go">→</div>
+        </a>
+        <a class="repo-row" href="#">
+          <img class="repo-thumb" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Taobaotrends Ecommerce site project">
+          <div class="repo-meta">
             <div class="repo-path">projects<span class="slash">/</span>taobaotrends</div>
             <div class="repo-name">Taobaotrends — Ecommerce</div>
           </div>
-        </div>
-        <div class="repo-card">
-          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Ecommerce Website WordPress project">
-          <div class="repo-body">
+          <div class="repo-tag">Web · Ecommerce</div>
+          <div class="repo-go">→</div>
+        </a>
+        <a class="repo-row" href="#">
+          <img class="repo-thumb" src="https://sanjay-jsm-official.github.io/docs/port_image.jpg" alt="Ecommerce Website WordPress project">
+          <div class="repo-meta">
             <div class="repo-path">projects<span class="slash">/</span>wp-ecommerce</div>
             <div class="repo-name">Ecommerce Website (WordPress)</div>
           </div>
-        </div>
-        <div class="repo-card">
-          <img class="repo-img" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Textile ERP System project">
-          <div class="repo-body">
+          <div class="repo-tag">Web · WordPress</div>
+          <div class="repo-go">→</div>
+        </a>
+        <a class="repo-row" href="#">
+          <img class="repo-thumb" src="https://sanjay-jsm-official.github.io/docs/port2.jpeg" alt="Textile ERP System project">
+          <div class="repo-meta">
             <div class="repo-path">projects<span class="slash">/</span>textile-erp</div>
             <div class="repo-name">Textile ERP System</div>
           </div>
-        </div>
+          <div class="repo-tag">Web · ERP</div>
+          <div class="repo-go">→</div>
+        </a>
       </div>
     </div>
   </section>
